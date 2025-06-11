@@ -18,6 +18,7 @@
       text-align: center;
     }
 
+    /* Estilo da foto do casal */
     img {
       width: 260px;
       height: 260px;
@@ -34,14 +35,17 @@
       margin-bottom: 10px;
     }
 
+    /* Estilo da caixa do contador */
     #contador {
-      font-size: 2.5em;
+      font-size: 2em;
       background: white;
-      padding: 20px 40px;
+      padding: 20px 30px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+      max-width: 90%;
     }
 
+    /* Animação do coração */
     .heart {
       font-size: 3em;
       animation: pulse 1s infinite;
@@ -59,16 +63,38 @@
   <!-- Foto do casal -->
   <img src="foto.jpg" alt="Rafael e Gabriela">
 
+  <!-- Coração animado -->
   <div class="heart">❤️</div>
+
+  <!-- Nome do casal -->
   <h1>Rafael & Gabriela</h1>
+
+  <!-- Onde o contador será exibido -->
   <div id="contador">Carregando...</div>
 
   <script>
-    const dataInicio = new Date("2024-03-30");
-    const hoje = new Date();
-    const diff = hoje - dataInicio;
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("contador").innerText = `Estamos juntos há ${dias} dias 💕`;
+    // Define a data de início do relacionamento
+    const dataInicio = new Date("2024-03-30T00:00:00");
+
+    // Função que calcula e atualiza o tempo juntos
+    function atualizarContador() {
+      const agora = new Date(); // Pega a data e hora atual
+      const diff = agora - dataInicio; // Diferença em milissegundos
+
+      // Converte milissegundos em dias, horas, minutos e segundos
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      // Exibe o resultado no elemento com id "contador"
+      document.getElementById("contador").innerText =
+        `Estamos juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
+    }
+
+    // Chama a função imediatamente e depois a cada 1 segundo
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
   </script>
 
 </body>
