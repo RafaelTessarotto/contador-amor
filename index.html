@@ -17,10 +17,22 @@
       flex-direction: column;
       text-align: center;
     }
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border: 4px solid white;
+    }
+
     h1 {
       font-size: 3em;
       margin-bottom: 10px;
     }
+
     #contador {
       font-size: 2.5em;
       background: white;
@@ -28,10 +40,12 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
     }
+
     .heart {
       font-size: 3em;
       animation: pulse 1s infinite;
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.2); }
@@ -40,16 +54,21 @@
   </style>
 </head>
 <body>
+
+  <!-- Foto do casal -->
+  <img src="foto.jpg" alt="Rafael e Gabriela">
+
   <div class="heart">❤️</div>
   <h1>Rafael & Gabriela</h1>
   <div id="contador">Carregando...</div>
 
   <script>
-    const dataInicio = new Date("2024-03-30"); // Data em que começaram a namorar
+    const dataInicio = new Date("2024-03-30");
     const hoje = new Date();
     const diff = hoje - dataInicio;
     const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
     document.getElementById("contador").innerText = `Estamos juntos há ${dias} dias 💕`;
   </script>
+
 </body>
 </html>
