@@ -18,8 +18,8 @@
       text-align: center;
     }
 
-    /* Estilo da foto do casal */
-    img {
+    /* Estilo da foto com brilho animado */
+    .foto-brilhante {
       width: 260px;
       height: 260px;
       object-fit: cover;
@@ -27,7 +27,38 @@
       border-radius: 50%;
       margin-bottom: 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      border: 4px solid white;
+      border: 10px solid white; /* Moldura aumentada */
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Anel de brilho animado */
+    .foto-brilhante::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      width: 284px;
+      height: 284px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #ff69b4,
+        #ffc0cb,
+        #ff69b4,
+        #ffc0cb,
+        #ff69b4
+      );
+      z-index: -1;
+      animation: girar 4s linear infinite;
+      filter: blur(6px);
+    }
+
+    /* Animação girando */
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     h1 {
@@ -35,7 +66,6 @@
       margin-bottom: 10px;
     }
 
-    /* Estilo da caixa do contador */
     #contador {
       font-size: 2em;
       background: white;
@@ -45,7 +75,6 @@
       max-width: 90%;
     }
 
-    /* Animação do coração */
     .heart {
       font-size: 3em;
       animation: pulse 1s infinite;
@@ -60,8 +89,8 @@
 </head>
 <body>
 
-  <!-- Foto do casal -->
-  <img src="foto.jpg" alt="Rafael e Gabriela">
+  <!-- Foto com brilho -->
+  <img src="foto.jpg" alt="Rafael e Gabriela" class="foto-brilhante">
 
   <!-- Coração animado -->
   <div class="heart">❤️</div>
@@ -69,30 +98,28 @@
   <!-- Nome do casal -->
   <h1>Rafael & Gabriela</h1>
 
-  <!-- Onde o contador será exibido -->
+  <!-- Contador de tempo juntos -->
   <div id="contador">Carregando...</div>
 
   <script>
-    // Define a data de início do relacionamento
+    // Data de início do relacionamento
     const dataInicio = new Date("2024-03-30T00:00:00");
 
-    // Função que calcula e atualiza o tempo juntos
+    // Atualiza o contador com dias, horas, minutos e segundos
     function atualizarContador() {
-      const agora = new Date(); // Pega a data e hora atual
-      const diff = agora - dataInicio; // Diferença em milissegundos
+      const agora = new Date();
+      const diff = agora - dataInicio;
 
-      // Converte milissegundos em dias, horas, minutos e segundos
       const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
       const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutos = Math.floor((diff / (1000 * 60)) % 60);
       const segundos = Math.floor((diff / 1000) % 60);
 
-      // Exibe o resultado no elemento com id "contador"
       document.getElementById("contador").innerText =
         `Estamos juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos 💕`;
     }
 
-    // Chama a função imediatamente e depois a cada 1 segundo
+    // Atualiza o contador a cada segundo
     atualizarContador();
     setInterval(atualizarContador, 1000);
   </script>
